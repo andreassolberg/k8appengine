@@ -1,0 +1,16 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ingress-apps
+spec:
+  backend:
+    serviceName: web-server-service
+    servicePort: 80
+  rules:
+  - host: web.app.labs.uninett.no
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: web-server-service
+          servicePort: 80

@@ -1,0 +1,22 @@
+{
+  "name": "kubernetes-appengine",
+  "version": "0.1.0",
+  "description": "Kubernetes AppEngine",
+  "main": "index.js",
+  "scripts": {
+    "start_": "node index.js",
+    "start": "node --use_strict server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Andreas Åkre Solberg <andreas.solberg@uninett.no>",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "cliff": "^0.1.10",
+    "express": "^4.14.0",
+    "extend": "^3.0.0",
+    "k8s": "^0.2.0",
+    "moniker": "^0.1.2",
+    "nconf": "^0.8.4"
+  }
+}
