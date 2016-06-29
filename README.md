@@ -50,5 +50,13 @@ Each service will perform provisioning, and add a provision result entry in the 
 
 
 
+## Deploying a new application
 
+* Process an instance of an `DeploymentConfiguration`.
+* Check if `DeploymentConfiguration` is already deployed, or get the status.
+* Check if the `DeploymentConfiguration` differ from existing deployment.
+* Update or create.
 
+Provision all missing service provisions.
+
+Combine application defintion, provisoned services and deployment configuraiton and get all kubernetes objects that needs to be created.

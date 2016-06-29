@@ -1,13 +1,13 @@
 [
   {
-  	"title": "Hello World",
   	"id": "helloworld",
+  	"title": "Hello World",
     "subtitle": "A simple webserver",
   	"descr": "A simple Hello World application, running NGINX.",
     "price": "0",
   	"template": {
-  		"rc": {
-  			"kind": "ReplicationController",
+  		"deployment": {
+  			"kind": "Deployment",
   			"apiVersion": "v1",
   			"metadata": {
   				"name": "web-server-rc",
@@ -40,7 +40,10 @@
   					}
   				}
   			}
-  		}
+  		},
+      "service": {
+
+      }
   	},
   	"services": {
   		"sql": {},
