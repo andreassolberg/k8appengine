@@ -1,6 +1,18 @@
 # App Engine (Kubernetes)
 
 
+
+To run the app engine:
+
+	NODE_ENV=development npm start | bunyan -l debug -L
+
+
+
+----
+
+Text below is OUTDATED
+
+
 An application spec is stored in `/etc/{app}.js`:
 
 

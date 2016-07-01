@@ -1,10 +1,17 @@
 var
   express    = require('express'),
-  bodyParser = require('body-parser');
+  bodyParser = require('body-parser'),
+  bunyanlogger = require('express-bunyan-logger')
+
+
+
 var API      = require('./lib/API').API;
 
 var app      = express();
 
+app.use(bunyanlogger({
+  "parseUA": false
+}));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
@@ -13,7 +20,7 @@ var a = new API();
 
 app.use('/', a.getRouter());
 app.listen(port);
-console.log('API listening to port ' + port);
+// console.log('API listening to port ' + port);
 
 
 

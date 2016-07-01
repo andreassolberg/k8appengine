@@ -8,23 +8,14 @@
   	"template": {
   		"deployment": {
   			"kind": "Deployment",
-  			"apiVersion": "v1",
+  			"apiVersion": "extensions/v1beta1",
   			"metadata": {
-  				"name": "web-server-rc",
-  				"labels": {
-  					"state": "serving"
-  				}
   			},
   			"spec": {
   				"replicas": 1,
-  				"selector": {
-  					"app": "web-server-v1"
-  				},
   				"template": {
   					"metadata": {
   						"labels": {
-  							"app": "web-server-v1",
-  							"appid": "web-server"
   						}
   					},
   					"spec": {
@@ -42,8 +33,24 @@
   			}
   		},
       "service": {
-
+        "kind": "Service",
+        "apiVersion": "v1",
+        "metadata": {
+          "name": "hello-world-blah-blah"
+        },
+        "spec": {
+          "selector": {
+            "deployment": "hello-world-blah-blah"
+          },
+          "ports": [{
+            "protocol": "TCP",
+            "port": 80,
+            "targetPort": 80
+          }],
+          "type": "NodePort"
+        }
       }
+
   	},
   	"services": {
   		"sql": {},
