@@ -1,11 +1,14 @@
 var
   express    = require('express'),
   bodyParser = require('body-parser'),
-  bunyanlogger = require('express-bunyan-logger')
-
-
+  bunyanlogger = require('express-bunyan-logger'),
+  bunyan = require('bunyan')
 
 var API      = require('./lib/API').API;
+
+
+
+var logger  = bunyan.createLogger({name: 'appengine-server'});
 
 var app      = express();
 
@@ -20,6 +23,9 @@ var a = new API();
 
 app.use('/', a.getRouter());
 app.listen(port);
+
+logger.info({"port": port}, "API running and listening to port " + port)
+
 // console.log('API listening to port ' + port);
 
 
