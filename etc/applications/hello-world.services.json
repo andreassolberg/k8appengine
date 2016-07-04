@@ -1,0 +1,21 @@
+{
+  "sql":{},
+  "dns":{},
+  "dataporten":{
+    "name": "Hello world!",
+    "descr": "Dette er en demonstrator hello world app som kjører i UNINETTS k8 app store.",
+    "path": "/callback",
+    "scopes": [
+      "userid",
+      "profile"
+    ]
+  },
+  "authorization": {
+    "roles": {
+      "admin": "Administrator",
+      "editor": "Editor",
+      "member": "Regular member"
+    }
+  },
+  "certificate":{}
+}

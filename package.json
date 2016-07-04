@@ -21,6 +21,7 @@
     "moniker": "^0.1.2",
     "mysql2": "1.0.0-rc.5",
     "nconf": "^0.8.4",
-    "request-promise": "^3.0.0"
+    "request-promise": "^3.0.0",
+    "uuid": "^2.0.2"
   }
 }
