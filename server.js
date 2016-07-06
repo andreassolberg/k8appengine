@@ -1,5 +1,6 @@
 var
   express    = require('express'),
+  cors = require('cors'),
   bodyParser = require('body-parser'),
   bunyanlogger = require('express-bunyan-logger'),
   bunyan = require('bunyan')
@@ -12,6 +13,7 @@ var logger  = bunyan.createLogger({name: 'appengine-server'});
 
 var app      = express();
 
+app.use(cors());
 app.use(bunyanlogger({
   "parseUA": false
 }));
