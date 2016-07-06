@@ -7,11 +7,11 @@ var
 
 var API      = require('./lib/API').API;
 
-
-
 var logger  = bunyan.createLogger({name: 'appengine-server'});
 
 var app      = express();
+
+app.set('json spaces', 2);
 
 app.use(cors());
 app.use(bunyanlogger({
