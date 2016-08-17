@@ -4,8 +4,9 @@
 
 To run the app engine:
 
-	NODE_ENV=development npm start | bunyan -l debug -L
-
+```
+NODE_ENV=development npm start | bunyan -l debug -L
+```
 
 
 ----

@@ -28,10 +28,9 @@ app.listen(port);
 
 logger.info({"port": port}, "API running and listening to port " + port)
 
+
+
 // console.log('API listening to port ' + port);
-
-
-
 // var DataStore = require('./lib/DataStore').DataStore
 // var AppLibrary = require('./lib/AppLibrary').AppLibrary
 // var lib = new AppLibrary();
