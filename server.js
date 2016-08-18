@@ -3,7 +3,10 @@ var
   cors = require('cors'),
   bodyParser = require('body-parser'),
   bunyanlogger = require('express-bunyan-logger'),
-  bunyan = require('bunyan')
+  bunyan = require('bunyan'),
+  config = require('./lib/Config').Config
+
+var DataportenAPI = require('dataportenapi').DataportenAPI;
 
 var API      = require('./lib/API').API;
 
@@ -21,9 +24,31 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 var port = process.env.PORT || 8080;
-var a = new API();
 
-app.use('/', a.getRouter());
+
+var fakeMiddleware = function(req, res, next) {
+	req.headers.authorization = 'Basic ' + (new Buffer("dataporten:" + config.get("dataportenapi:password")).toString('base64'));
+	req.headers['x-dataporten-userid'] = '9f70f418-3a75-4617-8375-883ab6c2b0af';
+	req.headers['x-dataporten-userid-sec'] = 'feide:andreas@uninett.no,feide:andreas2@uninett.no';
+	req.headers['x-dataporten-clientid'] = '610cbba7-3985-45ae-bc9f-0db0e36f71ad';
+	next();
+};
+
+
+
+
+var dataportenapi = new DataportenAPI({
+    "password": config.get("dataportenapi:password")
+});
+var a = new API(dataportenapi);
+
+if (config.get('dataportenapi:fakeMiddleware')) {
+  logger.info("Using fake middleware. DEVELOPMENT ONLY!")
+  app.use('/', fakeMiddleware, dataportenapi.setup(), a.getRouter());
+} else {
+  app.use('/', dataportenapi.setup(), a.getRouter());
+}
+
 app.listen(port);
 
 logger.info({"port": port}, "API running and listening to port " + port)
