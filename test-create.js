@@ -11,19 +11,22 @@ var log = bunyan.createLogger({
 	level: "debug"
 });
 
+let max = 999; let min = 100;
+var random = Math.floor(Math.random() * (max - min)) + min
 
+var token = process.env.TOKEN
 var input = {
-  "application": "helloworld",
+  "application": "jupyter",
   "meta": {
-    "title": "Hei verden!"
+    "title": "Notebook " + random
   },
   "services": {
     "dns": {
-      "hostname": "heiverden5",
-      "domain": "apps.uninett-labs.no"
+      "hostname": "notebook" + random,
+      "domain": "daas.labs.uninett.no"
     },
     "dataporten": {
-      "token": "xxx"
+      "token": token
     }
   },
   "infrastructure": "sigma",
@@ -33,6 +36,7 @@ var input = {
 
 
 var userId = "9f70f418-3a75-4617-8375-883ab6c2b0af"
+
 this.library = new AppLibrary()
 
 var deploymentConfiguration = new DeploymentConfiguration(input)
@@ -40,18 +44,30 @@ deploymentConfiguration.owner = userId
 var applicationId = input.application
 
 console.log("About to get application " + applicationId)
-
+//
 // DataStore.getAllDNSentriesFromInfrastructure("gke")
 //   .then(function(data) {
 //     console.log("Data", JSON.stringify(data, undefined, 2))
 //   })
+//
+// DataStore.getDeployment(req.dataporten.userid, req.params.id)
+// var deployments = DataStore.getDeployments(req.dataporten.userid)
+
+
+var application = null
+var deployment = null
+
+
 
 
 this.library.getItem(applicationId)
-  .then((application) => {
+  .then((a) => {
+    application = a
+
     console.log("--- Application ---");
     console.log(application)
     console.log("--- ----------- ---");
+
     return DeploymentManager.create(application, deploymentConfiguration, log)
   })
   .then((deployment) => {
