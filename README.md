@@ -67,6 +67,19 @@ var a = new AppEngine();
 a.deploy(dataportenAppInstance);
 ```
 
+## How to clean up Dataporten provisioning.
+
+```
+dptool clients mine | grep k8e | cut -f 1 -d\  | xargs -n 1 dptool clients delete
+
+kubectl --context daas  --namespace appengine delete deployments --all
+kubectl --context daas  --namespace appengine delete replicaset --all
+kubectl --context daas  --namespace appengine delete pods --all
+kubectl --context daas  --namespace appengine delete secrets --all
+kubectl --context daas  --namespace appengine delete configmaps --all
+kubectl --context daas  --namespace appengine delete pvc --all
+```
+
 
 ## Deploying a new application
 
