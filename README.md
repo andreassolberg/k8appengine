@@ -78,6 +78,13 @@ kubectl --context daas  --namespace appengine delete pods --all
 kubectl --context daas  --namespace appengine delete secrets --all
 kubectl --context daas  --namespace appengine delete configmaps --all
 kubectl --context daas  --namespace appengine delete pvc --all
+
+kubectl --context gke_turnkey-cocoa-720_europe-west1-c_cluster-1  --namespace appengine delete deployments --all
+kubectl --context gke_turnkey-cocoa-720_europe-west1-c_cluster-1  --namespace appengine delete replicaset --all
+kubectl --context gke_turnkey-cocoa-720_europe-west1-c_cluster-1  --namespace appengine delete pods --all
+kubectl --context gke_turnkey-cocoa-720_europe-west1-c_cluster-1  --namespace appengine delete secrets --all
+kubectl --context gke_turnkey-cocoa-720_europe-west1-c_cluster-1  --namespace appengine delete configmaps --all
+kubectl --context gke_turnkey-cocoa-720_europe-west1-c_cluster-1  --namespace appengine delete pvc --all
 ```
 
 
