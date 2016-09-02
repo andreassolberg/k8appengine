@@ -11,7 +11,7 @@ var log = bunyan.createLogger({
 	level: "debug"
 });
 
-var deploymentId = 'xxayay'
+
 var deploymentConfiguration = new DeploymentConfiguration({
   "application": "helloworld",
   "meta": {
@@ -39,34 +39,16 @@ deployment
   .setDeploymentConfiguration(deploymentConfiguration)
   .setApplication("helloworld")
 var create = true
-
-var provisioned = SQL.get(deploymentId, need, config, deployment, create)
-
-
-log.info(provisioned, "Provisioned SQL database")
-
-SQL.remove(deployment, serverdeployment, config)
-
-
-
-// this.library.getItem(applicationId)
-//   .then((a) => {
-//     application = a
-//
-//     console.log("--- Application ---");
-//     console.log(application)
-//     console.log("--- ----------- ---");
-//
-//     return DeploymentManager.create(application, deploymentConfiguration, log)
-//   })
-//   .then((deployment) => {
-//     console.log('Successfully created deployment', deployment)
-//     // Update DNS as well
-//     // return CommonIngressManager.update()
-//   })
-//   .then(() => {
-//     console.log("COMPLETED...")
-//   })
-//   .catch((error) => {
-//     console.error("ERROR", error)
-//   })
+var config = {}
+SQL.get(deployment.getId(), need, config, deployment, create)
+  .then((provisioned) => {
+      log.info(provisioned, "Provisioned SQL database")
+  })
+  .then(() => {
+    var serverdeployment = {}
+    return SQL.remove(deployment, serverdeployment, config)
+  })
+  .catch((err) => {
+    console.error(" ---- ERROR -----")
+    console.error(err)
+  })
