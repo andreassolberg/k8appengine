@@ -73,6 +73,7 @@ a.deploy(dataportenAppInstance);
 dptool clients mine | grep k8e | cut -f 1 -d\  | xargs -n 1 dptool clients delete
 
 kubectl --context daas  --namespace appengine delete deployments --all
+kubectl --context daas  --namespace appengine delete services --all
 kubectl --context daas  --namespace appengine delete replicaset --all
 kubectl --context daas  --namespace appengine delete pods --all
 kubectl --context daas  --namespace appengine delete secrets --all
@@ -81,6 +82,7 @@ kubectl --context daas  --namespace appengine delete pvc --all
 
 kubectl --context gke_turnkey-cocoa-720_europe-west1-c_cluster-1  --namespace appengine delete deployments --all
 kubectl --context gke_turnkey-cocoa-720_europe-west1-c_cluster-1  --namespace appengine delete replicaset --all
+kubectl --context gke_turnkey-cocoa-720_europe-west1-c_cluster-1  --namespace appengine delete services --all
 kubectl --context gke_turnkey-cocoa-720_europe-west1-c_cluster-1  --namespace appengine delete pods --all
 kubectl --context gke_turnkey-cocoa-720_europe-west1-c_cluster-1  --namespace appengine delete secrets --all
 kubectl --context gke_turnkey-cocoa-720_europe-west1-c_cluster-1  --namespace appengine delete configmaps --all
