@@ -1,0 +1,139 @@
+{
+	"deployment": {
+		"apiVersion": "extensions/v1beta1",
+		"kind": "Deployment",
+		"metadata": {
+		},
+		"spec": {
+			"replicas": 1,
+			"strategy": {
+				"type": "RollingUpdate",
+				"rollingUpdate": {
+					"maxUnavailable": 0,
+					"maxSurge": 1
+				}
+			},
+			"template": {
+				"metadata": {
+					"labels": {}
+				},
+				"spec": {
+					"containers": [{
+						"name": "wordpress",
+						"image": "uninettno/rnd-feide-no:build-93",
+						"resources": {},
+						"env": [
+							{
+						    "name": "AUTH_KEY",
+						    "value": "fae4d790-aa0a-42a7-aa5d-95e7acdb40dd"
+						  },
+							{
+						    "name": "SECURE_AUTH_KEY",
+						    "value": "f6ed8510-1412-4627-82b1-27de33fd7227"
+						  },
+							{
+						    "name": "LOGGED_IN_KEY",
+						    "value": "c4cecdd7-7303-4e83-b446-0d36b8917828"
+						  },
+							{
+						    "name": "NONCE_KEY",
+						    "value": "7b8ee36c-fe15-4d16-ad3c-e264bdbcda42"
+						  },
+							{
+						    "name": "AUTH_SALT",
+						    "value": "198a2507-b484-42d6-95fa-24b1da349ac5"
+						  },
+							{
+						    "name": "SECURE_AUTH_SALT",
+						    "value": "72fabeb7-7263-4e8f-b68e-1887a77e3a02"
+						  },
+							{
+						    "name": "LOGGED_IN_SALT",
+						    "value": "d3e2d276-0d54-4ef3-9c68-ee128f38d9de"
+						  },
+							{
+						    "name": "NONCE_SALT",
+						    "value": "704d129f-5259-4df8-b432-9ae2a4d63dbb"
+						  },
+							{
+						    "name": "WORDPRESS_DB_HOST",
+						    "valueFrom": {
+						      "secretKeyRef": {
+						        "name": "",
+						        "key": "sqlhost"
+						      }
+						    }
+						  },
+							{
+						    "name": "WORDPRESS_DB_USER",
+						    "valueFrom": {
+						      "secretKeyRef": {
+						        "name": "",
+						        "key": "sqluser"
+						      }
+						    }
+						  },
+							{
+						    "name": "WORDPRESS_DB_PASSWORD",
+						    "valueFrom": {
+						      "secretKeyRef": {
+						        "name": "",
+						        "key": "sqlpassword"
+						      }
+						    }
+						  },
+							{
+						    "name": "WORDPRESS_DB_NAME",
+						    "valueFrom": {
+						      "secretKeyRef": {
+						        "name": "",
+						        "key": "sqldb"
+						      }
+						    }
+						  },
+							{
+						    "name": "TLS",
+						    "value": "true"
+						  }
+
+						],
+						"imagePullPolicy": "Always",
+						"ports": [{
+							"containerPort": 80
+						}],
+						"volumeMounts": []
+					}],
+					"restartPolicy": "Always"
+				}
+			}
+		}
+	},
+	"service": {
+    "kind": "Service",
+    "apiVersion": "v1",
+    "metadata": {
+    },
+    "spec": {
+      "selector": {
+      },
+      "ports": [{
+        "protocol": "TCP",
+        "port": 80,
+        "targetPort": 80
+      }],
+      "type": "NodePort"
+    }
+  },
+  "ingress": {
+    "apiVersion": "extensions/v1beta1",
+    "kind": "Ingress",
+    "metadata": {},
+    "spec": {
+      "backend": {
+        "serviceName": "default-webserver",
+        "servicePort": 80
+      },
+      "rules": []
+    }
+  }
+}

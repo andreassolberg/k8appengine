@@ -3,6 +3,8 @@ kind: Ingress
 metadata:
   name: appengine-common-webrouter
 spec:
+  tls:
+  - secretName: common-webrouter-ssl
   backend:
     serviceName: web-server-service
     servicePort: 80

@@ -1,0 +1,18 @@
+{
+    "kind": "Service",
+    "apiVersion": "v1",
+    "metadata": {
+        "name": "k8appengine"
+    },
+    "spec": {
+        "selector": {
+            "appid": "k8appengine"
+        },
+        "ports": [{
+            "protocol": "TCP",
+            "port": 80,
+            "targetPort": 8080
+        }],
+        "type": "NodePort"
+    }
+}

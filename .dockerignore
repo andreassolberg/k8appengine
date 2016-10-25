@@ -1,0 +1,4 @@
+ENV
+etc
+etc-kubectl
+node_modules

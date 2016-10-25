@@ -1,0 +1,49 @@
+{
+	"apiVersion": "extensions/v1beta1",
+	"kind": "Deployment",
+	"metadata": {
+		"name": "k8appengine"
+	},
+	"spec": {
+		"replicas": 1,
+		"template": {
+			"metadata": {
+				"labels": {
+					"app": "k8appengine",
+					"appid": "k8appengine"
+				}
+			},
+			"spec": {
+				"containers": [{
+					"name": "k8appengine",
+					"image": "uninettno/k8appengine",
+					"resources": {
+						"requests": {
+							"cpu": "10m"
+						},
+						"limits": {
+							"cpu": "200m"
+						}
+					},
+					"env": [],
+					"imagePullPolicy": "Always",
+					"ports": [{
+						"containerPort": 8080
+					}],
+					"volumeMounts": [{
+						"name": "k8appengine",
+						"mountPath": "/app/etc",
+						"readOnly": true
+					}]
+				}],
+				"restartPolicy": "Always",
+				"volumes": [{
+					"name": "k8appengine",
+					"secret": {
+						"secretName": "k8appengine"
+					}
+				}]
+			}
+		}
+	}
+}

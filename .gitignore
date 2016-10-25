@@ -2,3 +2,6 @@ node_modules
 etc/config.json
 etc/gcekey.json
 etc/gcekey.pem
+etc-kubectl/*secret*
+etc-kubectl/*tls*
+ENV

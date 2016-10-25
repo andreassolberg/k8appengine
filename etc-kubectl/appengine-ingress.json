@@ -1,0 +1,38 @@
+{
+  "apiVersion": "extensions/v1beta1",
+  "kind": "Ingress",
+  "metadata": {
+    "name": "k8appengine",
+    "annotations": {
+      "kubernetes.io/tls-acme": "false"
+    }
+  },
+  "spec": {
+    "tls": [
+      {
+        "hosts": ["api.apps.uninett-labs.no"],
+        "secretName": "appengine-tls"
+      }
+    ],
+    "backend": {
+      "serviceName": "k8appengine",
+      "servicePort": 80
+    },
+    "rules": [
+      {
+        "host": "api.apps.uninett-labs.no",
+        "http": {
+          "paths": [
+            {
+              "path": "/",
+              "backend": {
+                  "serviceName": "k8appengine",
+                  "servicePort": 80
+              }
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

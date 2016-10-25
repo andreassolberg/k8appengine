@@ -14,17 +14,15 @@ var log = bunyan.createLogger({
 
 var token = process.env.TOKEN
 var userId = "9f70f418-3a75-4617-8375-883ab6c2b0af"
-var deploymentId = 'jupyter-c7247e30523f'
+var deploymentId = 'wordpress-cb3253f99086'
 
 var data = {
   token: token
 }
 
 DeploymentManager.delete(userId, deploymentId, data, log)
-  .then((deployment) => {
-    console.log('Successfully created deployment', deployment)
-    // Update DNS as well
-    // return CommonIngressManager.update()
+  .then((res) => {
+    console.log('Successfully deleted deployment', res)
   })
   .then(() => {
     console.log("COMPLETED...")
